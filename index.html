@@ -5,12 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Random Restaurant: About Us</title>
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="public_html/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="public_html/bower_components/bootstrap/dist/css/font-awesome.min.css">
+    <link href="public_html/bower_components/font-awesome/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/mystyles.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="public_html/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="public_html/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
@@ -53,7 +54,7 @@
                 <li><a href="contactus.html"><i class="glyphicon glyphicon-phone"></i>Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a data-toggle="modal" data-target="#loginModal">
+                <li><a id="login">
                     <span class="glyphicon glyphicon-log-in"></span> Login</a>
                 </li>
             </ul>
@@ -77,9 +78,7 @@
                         <input type="checkbox" value="remember_me">Remember me
                     </div>
                     <button type="submit" class="btn btn-primary">Sign in</button>
-                    <button type="button" class="btn btn-default btn-sm"
-                            data-dismiss="modal">Cancel
-                    </button>
+                    <button type="button" id="cancelLogIn" class="btn btn-default btn-sm">Cancel</button>
                 </form>
 
             </div>
@@ -103,14 +102,70 @@
             </div>
             <div class="col-sm-2 col-xs-12">
                 <p style="padding:60px;"></p>
-                <a type="button" class="btn btn-warning btn-block"
-                   data-toggle="tooltip" title="Or Call us at +852 12345678"
-                   data-placement="bottom" href="#reserveform">Reserve Table</a>
+                <a type="button" id="reserve"
+                   class="btn btn-warning btn-block" >Reserve Table</a>
+                   <!--data-toggle="tooltip" title="Or Call us at +852 12345678"-->
+                   <!--data-placement="bottom" href="#reserveform">Reserve Table</a>-->
             </div>
         </div>
     </div>
 </header>
+<div id="reserveModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Reserve Table </h4>
+            </div>
+            <div class="modal-body">
 
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Number of Guests</label>
+                        <div class=" form-group col-sm-6 checkbox-inline">
+                            <input type="radio" class="checkbox-inline" name="num_of_guests">1
+                            <input type="radio" class="checkbox-inline" name="num_of_guests">2
+                            <input type="radio" class="checkbox-inline" name="num_of_guests">3
+                            <input type="radio" class="checkbox-inline" name="num_of_guests">4
+                            <input type="radio" class="checkbox-inline" name="num_of_guests">5
+                            <input type="radio" class="checkbox-inline" name="num_of_guests">6
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Select type</label>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-success active">
+                                <input type="radio" name="options" id="option1">Non-Smoking
+                            </label>
+                            <label class="btn btn-danger">
+                                <input type="radio" name="options" id="option2">Smoking
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Date and Time</label>
+                        <input type="date" class="datetime1">
+                        <input type="time" class="datetime2">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"></label>
+                        <button type="button" class="btn btn-primary">Reserve</button>
+                        <button type="button" class="btn btn-default btn-sm"
+                                id="cancelReserve">Cancel</button>
+
+                    </div>
+                    <div class="alert alert-warning alert-dismissible form-group" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> Please <a href="#">call</a> us to reserve for more than 6.
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
     <div class="row row-content">
         <div class="col-xs-12">
@@ -168,9 +223,19 @@
                     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
+                <div class="btn-group" id="carouselButtons">
+                    <button class="btn btn-danger btn-xs" id="carousel-pause">
+                        <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+                    </button>
+                    <button class="btn btn-danger btn-xs" id="carousel-play">
+                        <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
+
+
     <p style="padding:20px;"></p>
     <div class="row">
         <div class="col-xs-12 col-sm-3 col-sm-push-9">
@@ -322,14 +387,40 @@
     </div>
 </footer>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="public_html/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
+<script src="public_html/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip();
+    $(document).ready(function(){
+        $("#mycarousel").carousel( { interval: 2000 } );
+        $("#carousel-pause").click(function(){
+            $("#mycarousel").carousel('pause');
+        });
+        $("#carousel-play").click(function(){
+            $("#mycarousel").carousel('cycle');
+        });
+    });
+    $(document).ready(function(){
+        $("#login").click(function(){
+            $("#loginModal").modal('show');
+        });
+        $("#cancelLogIn").click(function(){
+            $("#loginModal").modal('hide');
+        });
+    });
+    $(document).ready(function(){
+        $("#reserve").click(function(){
+            $("#reserveModal").modal('show');
+        });
+        $("#cancelReserve").click(function(){
+            $("#reserveModal").modal('hide');
+        });
     });
 </script>
+<!--<script>-->
+    <!--$(document).ready(function () {-->
+        <!--$('[data-toggle="tooltip"]').tooltip();-->
+    <!--});-->
+<!--</script>-->
 </body>
-
 </html>

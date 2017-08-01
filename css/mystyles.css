@@ -2,7 +2,7 @@
 	margin-right: 50px;
 }
 .affix {
-	top:100px;
+	top:50px;
 }
 .carousel {
 	background:#1A237E;
@@ -56,4 +56,9 @@ footer{
 }
 .jumbotron{
     background: lightsteelblue;
+}
+#carouselButtons {
+    right:0px;
+    position: absolute;
+    bottom: 0px;
 }

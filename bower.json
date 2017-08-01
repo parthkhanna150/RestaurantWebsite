@@ -1,0 +1,25 @@
+{
+  "name": "restaurant",
+  "homepage": "https://github.com/parthkhanna150/RestaurantWebsite",
+  "authors": [
+    "Parth Khanna <parth.khanna@mail.mcgill.ca>"
+  ],
+  "description": "website practice",
+  "main": "index.html",
+  "keywords": [
+    "restaurant"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public_html/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0"
+  }
+}
